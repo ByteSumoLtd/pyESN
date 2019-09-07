@@ -135,11 +135,11 @@ class ESN():
         """
         # adjust for teacher forcing
         if self.teacher_forcing:
-            preactivation = (np.dot(self.W, state)
+            pre_activation = (np.dot(self.W, state)
                              + np.dot(self.W_in, input_pattern)
                              + np.dot(self.W_feedb, output_pattern))
         else:
-            preactivation = (np.dot(self.W, state)
+            pre_activation = (np.dot(self.W, state)
                              + np.dot(self.W_in, input_pattern))
 
 	# if we have noise, we apply it to state prior to any projection, so calculate the term now
@@ -155,10 +155,13 @@ class ESN():
             intermediate_state = self.sphere_radius * (pre_activation + noise_term) / norm_v
 
         # use a soft projection over the preactivations
-	if self.projection = 2:
+	elif self.projection = 2:
             steepness = self.steepness
             r = np.log(np.exp(1) + np.exp(steepness * norm_v)) / steepness
             intermediate_state = (pre_activation + noise_term) / r
+        # if no projection, add any noise and continue
+        else:
+            intermediate_state = (pre_activation + noise_term)
 
         # apply a final rectifier if needed
         if self.rectifier = 1:

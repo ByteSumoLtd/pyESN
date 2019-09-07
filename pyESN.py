@@ -54,7 +54,7 @@ class ESN():
             teacher_shift:   additive term applied to the target signal
 
             ----                   alterations by andrew@bytesumo.com
-            noise:           0 = no noise, or set a noise value, 0.001 = default, for (regularization)
+            noise:           0 = no noise (default), or set a noise value, ie 0.001, for (regularization)
             projection:      0 = no projection, 1 = spherical projection (default), 2 = soft projection   
             sphere_radius:   default is 1, or set a specific sphere_radius based on magnitude of signals for spherical projection
             steepness:       default is 2, or set a specfic steepness override to control soft projection

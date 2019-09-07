@@ -163,7 +163,7 @@ class ESN():
         # apply a final rectifier if needed
         if self.rectifier = 1:
             new_state = np.tanh(intermediate_state)
-        elif
+        else:
             new_state = intermediate_state
 
         return new_state 

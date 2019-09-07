@@ -31,7 +31,7 @@ def identity(x):
 class ESN():
 
     def __init__(self, n_inputs, n_outputs, n_reservoir=200,
-                 spectral_radius=0.95, sparsity=0, noise=0.0, input_shift=None,
+                 spectral_radius=0.95, sparsity=0, noise=0, input_shift=None,
                  input_scaling=None, teacher_forcing=True, feedback_scaling=None,
                  teacher_scaling=None, teacher_shift=None,
                  projection=1, sphere_radius=1, steepness=2, rectifier=0,
@@ -133,6 +133,7 @@ class ESN():
         also allows for a projection of the preactivation states:  0 = none, 1 = spherical, 2 = soft
         also allows for a final retifier of the preactivation states: 0 = none linear, 1 = tanh
         """
+        
         # adjust for teacher forcing
         if self.teacher_forcing:
             pre_activation = (np.dot(self.W, state)
@@ -148,7 +149,7 @@ class ESN():
         noise_term = self.noise * (self.random_state_.randn(self.n_reservoir) * 2 - 1)
 
         # if we have a global projection applied we need a global norm calculated, noise may be added here
-        if self.projection > 0:
+        if self.projection != 0:
             norm_v = np.linalg.norm(pre_activation + noise_term)
 
         # use a sherical projection over the preactivations 

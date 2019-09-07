@@ -43,7 +43,7 @@ class ESN():
             n_reservoir: nr of reservoir neurons
             spectral_radius: spectral radius of the recurrent weight matrix
             sparsity: proportion of recurrent weights set to zero
-            noise: noise added to each neuron (regularization)
+            
             input_shift: scalar or vector of length n_inputs to add to each
                         input dimension before feeding it to the network.
             input_scaling: scalar or vector of length n_inputs to multiply
@@ -51,6 +51,14 @@ class ESN():
             teacher_forcing: if True, feed the target back into output units
             teacher_scaling: factor applied to the target signal
             teacher_shift: additive term applied to the target signal
+
+            ---- alterations by andrew@bytesumo.com
+            noise: 0 = no noise (default), or set a noise value, ie, 0.001, for (regularization)
+            projection: 0 = no projection, 2 = spherical projection, 3 = soft projection   
+            rectifier: 0 = no rectifier (ie linear), 1 = hard tanh rectifier
+            sphere_radius: default is 1, or set a sphere_radius
+            ---- end of alterations
+
             out_activation: output activation function (applied to the readout)
             inverse_out_activation: inverse of the output activation function
             random_state: positive integer seed, np.rand.RandomState object,

@@ -156,7 +156,7 @@ class ESN():
 
         # use a soft projection over the preactivations
 	if self.projection = 2:
-            steepness = 2.0
+            steepness = self.steepness
             r = np.log(np.exp(1) + np.exp(steepness * norm_v)) / steepness
             intermediate_state = (pre_activation + noise_term) / r
 

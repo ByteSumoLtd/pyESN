@@ -34,36 +34,39 @@ class ESN():
                  spectral_radius=0.95, sparsity=0, noise=0.001, input_shift=None,
                  input_scaling=None, teacher_forcing=True, feedback_scaling=None,
                  teacher_scaling=None, teacher_shift=None,
+                 projection=1, sphere_radius=1, steepness=2, rectifier=0,
                  out_activation=identity, inverse_out_activation=identity,
                  random_state=None, silent=True):
         """
         Args:
-            n_inputs: nr of input dimensions
-            n_outputs: nr of output dimensions
-            n_reservoir: nr of reservoir neurons
+            n_inputs:        nr of input dimensions
+            n_outputs:       nr of output dimensions
+            n_reservoir:     nr of reservoir neurons
             spectral_radius: spectral radius of the recurrent weight matrix
-            sparsity: proportion of recurrent weights set to zero
+            sparsity:        proportion of recurrent weights set to zero
             
-            input_shift: scalar or vector of length n_inputs to add to each
-                        input dimension before feeding it to the network.
-            input_scaling: scalar or vector of length n_inputs to multiply
-                        with each input dimension before feeding it to the netw.
+            input_shift:     scalar or vector of length n_inputs to add to each
+                             input dimension before feeding it to the network.
+            input_scaling:   scalar or vector of length n_inputs to multiply
+                             with each input dimension before feeding it to the netw.
             teacher_forcing: if True, feed the target back into output units
             teacher_scaling: factor applied to the target signal
-            teacher_shift: additive term applied to the target signal
+            teacher_shift:   additive term applied to the target signal
 
-            ---- alterations by andrew@bytesumo.com
-            noise: 0 = no noise (default), or set a noise value, ie, 0.001, for (regularization)
-            projection: 0 = no projection, 2 = spherical projection, 3 = soft projection   
-            rectifier: 0 = no rectifier (ie linear), 1 = hard tanh rectifier
-            sphere_radius: default is 1, or set a sphere_radius
-            ---- end of alterations
+            ----                   alterations by andrew@bytesumo.com
+            noise:           0 = no noise, or set a noise value, 0.001 = default, for (regularization)
+            projection:      0 = no projection, 1 = spherical projection (default), 2 = soft projection   
+            sphere_radius:   default is 1, or set a specific sphere_radius based on magnitude of signals for spherical projection
+            steepness:       default is 2, or set a specfic steepness override to control soft projection
+            rectifier:       0 = no rectifier (ie linear) default, 1 = hard tanh rectifier
+            ----                   end of alterations
 
-            out_activation: output activation function (applied to the readout)
-            inverse_out_activation: inverse of the output activation function
-            random_state: positive integer seed, np.rand.RandomState object,
-                          or None to use numpy's builting RandomState.
-            silent: supress messages
+            out_activation:  output activation function (applied to the readout)
+            inverse_out_activation: 
+                             inverse of the output activation function
+            random_state:    positive integer seed, np.rand.RandomState object,
+                             or None to use numpy's builting RandomState.
+            silent:          supress messages
         """
         # check for proper dimensionality of all arguments and write them down.
         self.n_inputs = n_inputs
@@ -77,6 +80,11 @@ class ESN():
 
         self.teacher_scaling = teacher_scaling
         self.teacher_shift = teacher_shift
+
+        self.projection = projection
+        self.rectifier = rectifier
+        self.sphere_radius = sphere_radius
+        self.steepness = steepness
 
         self.out_activation = out_activation
         self.inverse_out_activation = inverse_out_activation
@@ -121,7 +129,11 @@ class ESN():
 
         i.e., computes the next network state by applying the recurrent weights
         to the last state & and feeding in the current input and output patterns
+
+        also allows for a projection of the preactivation states:  0 = none, 1 = spherical, 2 = soft
+        also allows for a final retifier of the preactivation states: 0 = none linear, 1 = tanh
         """
+        # adjust for teacher forcing
         if self.teacher_forcing:
             preactivation = (np.dot(self.W, state)
                              + np.dot(self.W_in, input_pattern)
@@ -129,8 +141,32 @@ class ESN():
         else:
             preactivation = (np.dot(self.W, state)
                              + np.dot(self.W_in, input_pattern))
-        return (np.tanh(preactivation)
-                + self.noise * (self.random_state_.rand(self.n_reservoir) - 0.5))
+
+	# if we have noise, we apply it to state prior to any projection, so calculate the term now
+        # because the default is zero, this will be a vector of zeros as default (special case of noise is no noise)
+            noise_term = self.noise * (self.random_state_.randn(self.n_reservoir) * 2 - 1)
+
+        # if we have a global projection applied we need a global norm calculated, noise may be added here
+        if self.projection > 0:
+            norm_v = np.linalg.norm(pre_activation + noise_term)
+
+        # use a sherical projection over the preactivations 
+        if self.projection = 1:
+            intermediate_state = self.sphere_radius * (pre_activation + noise_term) / norm_v
+
+        # use a soft projection over the preactivations
+	if self.projection = 2:
+            steepness = 2.0
+            r = np.log(np.exp(1) + np.exp(steepness * norm_v)) / steepness
+            intermediate_state = (pre_activation + noise_term) / r
+
+        # apply a final rectifier if needed
+        if self.rectifier = 1:
+            new_state = np.tanh(intermediate_state)
+        elif
+            new_state = intermediate_state
+
+        return new_state 
 
     def _scale_inputs(self, inputs):
         """for each input dimension j: multiplies by the j'th entry in the

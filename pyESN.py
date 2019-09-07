@@ -144,7 +144,8 @@ class ESN():
 
 	# if we have noise, we apply it to state prior to any projection, so calculate the term now
         # because the default is zero, this will be a vector of zeros as default (special case of noise is no noise)
-            noise_term = self.noise * (self.random_state_.randn(self.n_reservoir) * 2 - 1)
+        
+        noise_term = self.noise * (self.random_state_.randn(self.n_reservoir) * 2 - 1)
 
         # if we have a global projection applied we need a global norm calculated, noise may be added here
         if self.projection > 0:
@@ -154,17 +155,17 @@ class ESN():
         if self.projection == 1:
             intermediate_state = self.sphere_radius * (pre_activation + noise_term) / norm_v
 
-        # use a soft projection over the preactivations
-	elif self.projection == 2:
+            # use a soft projection over the preactivations
+        elif self.projection == 2:
             steepness = self.steepness
             r = np.log(np.exp(1) + np.exp(steepness * norm_v)) / steepness
             intermediate_state = (pre_activation + noise_term) / r
-        # if no projection, add any noise and continue
+            # if no projection, add any noise and continue
         else:
             intermediate_state = (pre_activation + noise_term)
 
         # apply a final rectifier if needed
-        if self.rectifier = 1:
+        if self.rectifier == 1:
             new_state = np.tanh(intermediate_state)
         else:
             new_state = intermediate_state

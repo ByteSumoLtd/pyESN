@@ -5,7 +5,7 @@
 
 They are large randomly connected networks, initialised with random connections and weights. You feed them sequences, and the random weights, connections and feedback loops, excite the network deterministically - then after the sequence, you take what is known as a "readout" that represents the final state at the end of the sequence.
 
-Using the readout, the output state is passed as features to train a simple model from which to predict the target value(s) sought. These can be sampled for large networks (it feels to me similar to random indexing to me) but it is not strictly necessary to downsample.
+Using the readout, the output state is passed as features to train a simple model from which to predict the target value(s) sought. 
 
 Like all NNs, there are tunable hyper-parameters and schemes you can alter with ESNs too.
 
@@ -26,7 +26,7 @@ This ESN implementation is relatively simple and self-contained, though it offer
 
 # HyperSphere Implementation
 
-This library is a fork of the original pyESN, that implements the Nature paper: [Echo State Networks with Self-Normalizing Activations on the Hyper-Sphere](https://arxiv.org/abs/1903.11691)
+This library is a fork of the original pyESN, that implements the paper found on arxiv here: [Echo State Networks with Self-Normalizing Activations on the Hyper-Sphere](https://arxiv.org/abs/1903.11691)
 
 # Examples
 

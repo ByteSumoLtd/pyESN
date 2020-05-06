@@ -33,5 +33,6 @@ This library is a fork of the original pyESN, that implements the paper found on
 An example of calling and training the ESN on the HyperSphere: 
 
 - [learning a Mackey-Glass system](http://nbviewer.ipython.org/github/ByteSumoLtd/pyESN/blob/master/mackey.ipynb)
+
 An example of using DEAP to tune the ESN using genetic search:
 - [Genetic Tuning of ESNs on the HyperSphere using DEAP](http://nbviewer.ipython.org/github/ByteSumoLtd/pyESN/blob/master/GeneticallyTuned-pyESN-withSphericalActivations.ipynb)

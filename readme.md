@@ -1,3 +1,6 @@
+
+# Echo State Networks on the HyperSphere, in Python
+
 [Echo State Networks](http://www.scholarpedia.org/article/Echo_state_network) are a type NN that are not trained with back propagation. 
 
 They are large randomly connected networks, initialised with random connections and weights. You feed them sequences, and the random weights, connections and feedback loops, excite the network deterministically - then after the sequence, you take what is known as a "readout" that represents the final state at the end of the sequence.
@@ -28,6 +31,7 @@ This library is a fork of the original pyESN, that implements the Nature paper: 
 # Examples
 
 An example of calling and training the ESN on the HyperSphere: 
+
 - [learning a Mackey-Glass system](http://nbviewer.ipython.org/github/cknd/pyESN/blob/master/mackey.ipynb)
 An example of using DEAP to tune the ESN using genetic search:
 - [Genetic Tuning of ESNs on the HyperSphere using DEAP](http://nbviewer.ipython.org/github/ByteSumoLtd/pyESN/blob/master/GeneticallyTuned-pyESN-withSphericalActivations.ipynb)

@@ -17,9 +17,9 @@ This ESN implementation has a new activation function that helps to stablise the
 
 Examples of training ESNs, having HyperSphere Activations: 
 
-[Predicting Mackey Glass - testing ESNs having HyperSphere Activations](https://github.com/ByteSumoLtd/pyESN/blob/master/mackey_glass_t17.npy)
+[Predicting Mackey Glass - testing ESNs having HyperSphere Activations](https://github.com/ByteSumoLtd/pyESN/blob/master/mackey.ipynb)
 
-[Genetic Tuning of an ESN on the HyperSphere, via DEAP](https://github.com/ByteSumoLtd/pyESN/blob/Spherical/GeneticallyTuned-pyESN-withSphericalActivations.ipynb)
+[Genetic Tuning of an ESN on the HyperSphere, via DEAP](https://github.com/ByteSumoLtd/pyESN/blob/master/GeneticallyTuned-pyESN-withSphericalActivations.ipynb)
 
 Screenshot
 ==========

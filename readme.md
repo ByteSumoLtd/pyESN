@@ -7,7 +7,7 @@ Geoffrey Hinton [introduces Echo State Networks](https://www.youtube.com/watch?v
 
 # HyperSphere Activation Implementation
 
-The ByteSumo implementation is a fork of the original pyESN code, that implements the Nature paper: [Echo State Networks with Self-Normalizing Activations on the Hyper-Sphere](https://arxiv.org/abs/1903.11691)
+The ByteSumo implementation is a fork of the original pyESN code, that implements the Nature Scientific Reports paper: [Echo State Networks with Self-Normalizing Activations on the Hyper-Sphere](https://arxiv.org/abs/1903.11691)
 
 (Many thanks to Pietro Verzelli for discussions and help in explaining things to me).
 

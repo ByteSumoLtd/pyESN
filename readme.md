@@ -13,11 +13,15 @@ The ByteSumo implementation is a fork of the original pyESN code, that implement
 
 This ESN implementation has a new activation function that helps to stablise the ESN on the "Edge of Chaos" across the Spectral Radius range. It's a beta implementation, and it seems to work well. If you spot ways to improve my code, or create interesting example notebooks using this code, please offer a pull request and I'll update the repo.
 
-# Examples
+# Examples with Mackey Glass
 
 Examples of training ESNs, having HyperSphere Activations: 
 
 [Predicting Mackey Glass - testing ESNs having HyperSphere Activations](https://github.com/ByteSumoLtd/pyESN/blob/master/mackey.ipynb)
+
+##### Automatic Hyperparameter Tuning of ESNs with DEAP 
+
+The new hypersphere activation functions allow for practical hyperparameter searching to tune Echo State Networks, and the example code linked below illustrates how to do it using [DEAP](https://github.com/DEAP/deap). The example illustrates that using genetic search works very well!
 
 [Genetic Tuning of an ESN on the HyperSphere, via DEAP](https://github.com/ByteSumoLtd/pyESN/blob/master/GeneticallyTuned-pyESN-withSphericalActivations.ipynb)
 

@@ -30,3 +30,23 @@ The new hypersphere activation functions allow for practical hyperparameter sear
 ### Screenshot
 
 ![Mackey Glass prediction](https://github.com/ByteSumoLtd/pyESN/blob/master/Screenshot%202020-05-08%20at%2012.11.19.png)
+
+### Test Settings
+
+One of our recent DEAP runs produced some tuned settings achieving a very low MSE, even much better than the screenshot. Try it out as an example:
+
+      MSE: 0.000290172577304054
+
+      # Tuned Parameters:
+      
+      n_reservoir     =  1000
+      projection      =  1
+      noise           =  0
+      rectifier       =  1
+      steepness       =  2
+      sparsity        =  0.7686812449454254
+      sphere_radius   =  35.86520316391459
+      teacher_forcing =  True
+      random_state    =  174
+      spectral_radius =  1.3472585851237922
+
